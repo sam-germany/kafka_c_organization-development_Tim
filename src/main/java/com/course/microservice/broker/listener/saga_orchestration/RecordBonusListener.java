@@ -1,17 +1,16 @@
 package com.course.microservice.broker.listener.saga_orchestration;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
+import com.course.microservice.broker.message.BonusRecordedMessage;
+import com.course.microservice.broker.message.RecordBonusMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-import com.course.microservice.broker.message.BonusRecordedMessage;
-import com.course.microservice.broker.message.RecordBonusMessage;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Component
 public class RecordBonusListener {
@@ -37,8 +36,8 @@ public class RecordBonusListener {
 		bonusRecordedMessage.setEmployeeId(message.getEmployeeId());
 		bonusRecordedMessage.setBonusRecordedDateTime(LocalDateTime.of(LocalDate.of(2021, 06, 30), LocalTime.now()));
 
-		LOG.debug("[Orchestration-Saga] Publishing to record bonus response topic for appraisal {}",
-				bonusRecordedMessage.getAppraisalId());
+		LOG.debug("[Orchestration-Saga] Publishing to record bonus response topic for appraisal {}", bonusRecordedMessage.getAppraisalId());
+
 		return bonusRecordedMessage;
 	}
 
